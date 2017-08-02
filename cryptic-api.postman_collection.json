@@ -1,0 +1,684 @@
+{
+	"variables": [],
+	"info": {
+		"name": "cryptic-backend",
+		"_postman_id": "188974d5-7950-d771-12ad-470063c147d5",
+		"description": "APIs ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "orderbooks with authentication",
+			"description": "",
+			"item": [
+				{
+					"name": "All Orderbooks by Author with auth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"",
+									"    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
+									"    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
+									"    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+									"",
+									"    if(responseJSON.articles.length){",
+									"        var article = responseJSON.articles[0];",
+									"",
+									"        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
+									"        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
+									"        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
+									"        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
+									"        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
+									"        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
+									"        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
+									"        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
+									"        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
+									"        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
+									"        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
+									"        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
+									"        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
+									"        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+									"    } else {",
+									"        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+									"    }",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{apiUrl}}/orderbooks?author=mike",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"orderbooks"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "mike",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Orderbooks by exchangeName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"",
+									"    tests['Response contains \"articles\" property'] = responseJSON.hasOwnProperty('articles');",
+									"    tests['Response contains \"articlesCount\" property'] = responseJSON.hasOwnProperty('articlesCount');",
+									"    tests['articlesCount is an integer'] = Number.isInteger(responseJSON.articlesCount);",
+									"",
+									"    if(responseJSON.articles.length){",
+									"        var article = responseJSON.articles[0];",
+									"",
+									"        tests['Article has \"title\" property'] = article.hasOwnProperty('title');",
+									"        tests['Article has \"slug\" property'] = article.hasOwnProperty('slug');",
+									"        tests['Article has \"body\" property'] = article.hasOwnProperty('body');",
+									"        tests['Article has \"createdAt\" property'] = article.hasOwnProperty('createdAt');",
+									"        tests['Article\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(article.createdAt).toISOString() === article.createdAt;",
+									"        tests['Article has \"updatedAt\" property'] = article.hasOwnProperty('updatedAt');",
+									"        tests['Article\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(article.updatedAt).toISOString() === article.updatedAt;",
+									"        tests['Article has \"description\" property'] = article.hasOwnProperty('description');",
+									"        tests['Article has \"tagList\" property'] = article.hasOwnProperty('tagList');",
+									"        tests['Article\\'s \"tagList\" property is an Array'] = Array.isArray(article.tagList);",
+									"        tests['Article has \"author\" property'] = article.hasOwnProperty('author');",
+									"        tests['Article has \"favorited\" property'] = article.hasOwnProperty('favorited');",
+									"        tests['Article has \"favoritesCount\" property'] = article.hasOwnProperty('favoritesCount');",
+									"        tests['favoritesCount is an integer'] = Number.isInteger(article.favoritesCount);",
+									"    } else {",
+									"        tests['articlesCount is 0 when feed is empty'] = responseJSON.articlesCount === 0;",
+									"    }",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{apiUrl}}/orderbooks?author=mike&exchangeName=kraken",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"orderbooks"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "mike",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "exchangeName",
+									"value": "kraken",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Orderbook",
+					"request": {
+						"url": "{{apiUrl}}/orderbooks/{{slug}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Orderbook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"orderbook\" property'] = responseJSON.hasOwnProperty('orderbook');",
+									"",
+									"var orderbook = responseJSON.orderbook || {};",
+									"",
+									"tests['orderbook has \"slug\" property'] = orderbook.hasOwnProperty('slug');",
+									"tests['orderbook has \"exchangeName\" property'] = orderbook.hasOwnProperty('exchangeName');",
+									"tests['orderbook has \"coinPair\" property'] = orderbook.hasOwnProperty('coinPair');",
+									"tests['orderbook has \"action\" property'] = orderbook.hasOwnProperty('action');",
+									"tests['orderbook has \"price\" property'] = orderbook.hasOwnProperty('price');",
+									"tests['orderbook has \"quantity\" property'] = orderbook.hasOwnProperty('quantity');",
+									"tests['orderbook has \"total\" property'] = orderbook.hasOwnProperty('total');",
+									"tests['orderbook has \"createdAt\" property'] = orderbook.hasOwnProperty('createdAt');",
+									"tests['orderbook\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(orderbook.createdAt).toISOString() === orderbook.createdAt;",
+									"tests['orderbook has \"updatedAt\" property'] = orderbook.hasOwnProperty('updatedAt');",
+									"tests['orderbook\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(orderbook.updatedAt).toISOString() === orderbook.updatedAt;",
+									"tests['orderbook has \"author\" property'] = orderbook.hasOwnProperty('author');",
+									"",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/orderbooks/{{slug}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"orderbook\":{\"action\":\"sell\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Orderbook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"orderbook\" property'] = responseJSON.hasOwnProperty('orderbook');",
+									"",
+									"var orderbook = responseJSON.orderbook || {};",
+									"",
+									"if(tests['Orderbook has \"slug\" property']){",
+									"            postman.setEnvironmentVariable('slug', orderbook.slug);",
+									"        }",
+									"tests['Environment variable \"slug\" has been set'] = environment.slug === orderbook.slug;",
+									"",
+									"tests['Orderbook has \"slug\" property'] = orderbook.hasOwnProperty('slug');",
+									"tests['Orderbook has \"exchangeName\" property'] = orderbook.hasOwnProperty('exchangeName');",
+									"tests['Orderbook has \"coinPair\" property'] = orderbook.hasOwnProperty('coinPair');",
+									"tests['Orderbook has \"action\" property'] = orderbook.hasOwnProperty('action');",
+									"tests['Orderbook has \"price\" property'] = orderbook.hasOwnProperty('price');",
+									"tests['Orderbook has \"quantity\" property'] = orderbook.hasOwnProperty('quantity');",
+									"tests['Orderbook has \"total\" property'] = orderbook.hasOwnProperty('total');",
+									"tests['Orderbook has \"createdAt\" property'] = orderbook.hasOwnProperty('createdAt');",
+									"tests['Orderbook\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(orderbook.createdAt).toISOString() === orderbook.createdAt;",
+									"tests['Orderbook has \"updatedAt\" property'] = orderbook.hasOwnProperty('updatedAt');",
+									"tests['Orderbook\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(orderbook.updatedAt).toISOString() === orderbook.updatedAt;",
+									"tests['Orderbook has \"author\" property'] = orderbook.hasOwnProperty('author');",
+									"",
+									"if(tests['Orderbook has \"slug\" property']){",
+									"            postman.setEnvironmentVariable('slug', orderbook.slug);",
+									"        }",
+									"tests['Environment variable \"slug\" has been set'] = environment.slug === orderbook.slug;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/orderbooks",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"orderbook\":{\n            \"exchangeName\":\"kraken\",\n            \"coinPair\":\"LTC/USD\",\n            \"action\":\"buy\",\n            \"price\":1,\n            \"quantity\": 2,\n            \"total\":2\n            \n           }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Single Orderbook by Slug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var is200Response = responseCode.code === 200;",
+									"",
+									"tests['Response code is 200 OK'] = is200Response;",
+									"",
+									"if(is200Response){",
+									"    var responseJSON = JSON.parse(responseBody);",
+									"",
+									"    tests['Response contains \"orderbooks\" property'] = responseJSON.hasOwnProperty('orderbooks');",
+									"    tests['Response contains \"orderbooksCount\" property'] = responseJSON.hasOwnProperty('orderbooksCount');",
+									"    tests['orderbooksCount is an integer'] = Number.isInteger(responseJSON.orderbooksCount);",
+									"        ",
+									"    var orderbook = responseJSON.orderbooks[0];",
+									"",
+									"    tests['orderbook has \"slug\" property'] = orderbook.hasOwnProperty('slug');",
+									"    tests['orderbook has \"exchangeName\" property'] = orderbook.hasOwnProperty('exchangeName');",
+									"    tests['orderbook has \"coinPair\" property'] = orderbook.hasOwnProperty('coinPair');",
+									"    tests['orderbook has \"action\" property'] = orderbook.hasOwnProperty('action');",
+									"    tests['orderbook has \"price\" property'] = orderbook.hasOwnProperty('price');",
+									"    tests['orderbook has \"quantity\" property'] = orderbook.hasOwnProperty('quantity');",
+									"    tests['orderbook has \"total\" property'] = orderbook.hasOwnProperty('total');",
+									"    tests['orderbook has \"createdAt\" property'] = orderbook.hasOwnProperty('createdAt');",
+									"    tests['orderbook\\'s \"createdAt\" property is an ISO 8601 timestamp'] = new Date(orderbook.createdAt).toISOString() === orderbook.createdAt;",
+									"    tests['orderbook has \"updatedAt\" property'] = orderbook.hasOwnProperty('updatedAt');",
+									"    tests['orderbook\\'s \"updatedAt\" property is an ISO 8601 timestamp'] = new Date(orderbook.updatedAt).toISOString() === orderbook.updatedAt;",
+									"    tests['orderbook has \"author\" property'] = orderbook.hasOwnProperty('author');",
+									"",
+									"",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/orderbooks/{{slug}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"description": "",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+									"",
+									"var user = responseJSON.user || {};",
+									"",
+									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+									"tests['User has \"bio\" property'] = user.hasOwnProperty('bio');",
+									"tests['User has \"image\" property'] = user.hasOwnProperty('image');",
+									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/users/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"user\":{\"email\":\"mike@black.com\", \"password\":\"mikeblack\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Login and Remember Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+									"",
+									"var user = responseJSON.user || {};",
+									"",
+									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+									"tests['User has \"bio\" property'] = user.hasOwnProperty('bio');",
+									"tests['User has \"image\" property'] = user.hasOwnProperty('image');",
+									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+									"",
+									"if(tests['User has \"token\" property']){",
+									"    postman.setEnvironmentVariable('token', user.token);",
+									"}",
+									"",
+									"tests['Environment variable \"token\" has been set'] = environment.token === user.token;",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/users/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"user\":{\"email\":\"mike@black.com\", \"password\":\"mikeblack\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"if (!(environment.isIntegrationTest)) {",
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+									"",
+									"var user = responseJSON.user || {};",
+									"",
+									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+									"tests['User has \"bio\" property'] = user.hasOwnProperty('bio');",
+									"tests['User has \"image\" property'] = user.hasOwnProperty('image');",
+									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+									"}",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"user\":{\"email\":\"mike@black.com\", \"password\":\"mikeblack\", \"username\":\"mike\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Current User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+									"",
+									"var user = responseJSON.user || {};",
+									"",
+									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+									"tests['User has \"bio\" property'] = user.hasOwnProperty('bio');",
+									"tests['User has \"image\" property'] = user.hasOwnProperty('image');",
+									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/user",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON = JSON.parse(responseBody);",
+									"",
+									"tests['Response contains \"user\" property'] = responseJSON.hasOwnProperty('user');",
+									"",
+									"var user = responseJSON.user || {};",
+									"",
+									"tests['User has \"email\" property'] = user.hasOwnProperty('email');",
+									"tests['User has \"username\" property'] = user.hasOwnProperty('username');",
+									"tests['User has \"bio\" property'] = user.hasOwnProperty('bio');",
+									"tests['User has \"image\" property'] = user.hasOwnProperty('image');",
+									"tests['User has \"token\" property'] = user.hasOwnProperty('token');",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{apiUrl}}/user",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"user\":{\"email\":\"mike@black.com\", \"bio\":\"this is mike\"}}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
